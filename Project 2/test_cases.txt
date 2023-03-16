@@ -1,0 +1,180 @@
+﻿For Project 2, you not only had to compute the correct recommendation score for a variety of cases, but you had to report errors correctly. The answer should agree with what the online recommendation systemLinks to an external site. shows.
+
+
+Most people whose correctness score is below 40 made one or more of the foolish mistakes that the spec specifically warned you about or that were emphasized in class:
+
+
+Not having an ending exclamation on your error messages
+Ending the successful cost message with a period
+Misspelling words (or wrong, missing, or extra words)
+Miscapitalizing words
+Missing spaces between words
+(Some people who scored 40 or above also made some of these mistakes....) 
+
+
+If you question your correctness score, you must specifically state the test case numbers of the particular test cases that you believe your program passed for which we say it failed. Don't ask unless you've verified your program's results for those cases under both Visual C++ and either clang++ or g++. Make sure your output matches the required output exactly. Make sure you understand the reason your code failed the test before you ask. You can check calculations with the online day of the week calculator. If you question your correctness score, ask via email; there's no need to show us in person that your program works for you under one compiler.
+
+
+If your correctness score is below 40, it may not be because of a lack of understanding of C++, but something more fundamental: You ignored repeated admonitions in the spec and in class to avoid specific foolish mistakes, yet you made them anyway. Whatever your field of engineering is, you must fix this characteristic about yourself. No employer would dare hire someone who ignores repeated spoken and written directives: You'd pose a risk to the safety of yourself and others if you ignore safety rules, a risk to the financial health of the company if you ignore legal regulations, and a drain on productivity if your ignoring specifications causes you or others to devote more time later on to correct your mistakes.
+
+
+What's exasperating is that despite all that was said above, there will be people who will ask for a re-examination of their correctness score without saying which test case numbers to look at or without having tried those cases under multiple compilers. Those people are exhibiting the exact characteristics that may have caused them to make the mistake that cost them so many points: They don't pay attention to what they read.
+
+
+In total, project scores are out of 100. Here are the 18 test cases, each worth 5 points for a total of 90 points for your correctness score. Your reporting document and supplemental homework could have resulted in additional deductions worth 10 points.
+
+
+
+
+
+
+
+
+Test Cases
+	Case
+	Input
+	Desired Output
+	1
+	The Lake House
+100
+Yes
+10
+No
+No
+	Invalid theme value!
+	2
+	The Lake House
+5
+Yes No
+10
+No
+No
+	Invalid actor value!
+	3
+	The Lake House
+5
+Yes
+100
+No
+No
+	Invalid taste value!
+	4
+	The Lake House
+5
+Yes
+5
+No and Yes
+No
+	Invalid thumbed up value!
+	5
+	The Lake House
+5
+Yes
+5
+Yes
+No and Yes
+	Invalid thumbed down value!
+	6
+	The Lake House
+500
+Yes
+5
+Yes
+No and Yes
+	Invalid theme value!
+	7
+	The Lake House
+5
+no
+5
+Yes
+No and Yes
+	Invalid actor value!
+	8
+	The Lake House
+5
+No
+-5
+Yes
+No and Yes
+	Invalid taste value!
+	9
+	The Lake House
+5
+No
+5
+yes
+No and Yes
+	Invalid thumbed up value!
+	10
+	The Lake House
+10
+Yes
+10
+Yes
+No
+	Our recommendation for you for the movie: The Lake House is 10.0
+	11
+	Cars
+10
+Yes
+10
+No
+No
+	Our recommendation for you for the movie: Cars is 8.0
+	12
+	Cars
+10
+Yes
+10
+No
+Yes
+	Our recommendation for you for the movie: Cars is 6.0
+	13
+	Best In Show
+5
+Yes
+5
+No
+No
+	Our recommendation for you for the movie: Best In Show is 5.0
+	14
+	Titanic
+5
+No
+5
+No
+No
+	Our recommendation for you for the movie: Titanic is 3.0
+	15
+	Spiderman
+1
+No
+1
+No
+No
+	Our recommendation for you for the movie: Spiderman is 0.6
+	16
+	Star Wars
+5
+No
+5
+No
+Yes
+	Our recommendation for you for the movie: Star Wars is 1.0
+	17
+	Star Trek
+5
+No
+5
+Yes
+Yes
+	Our recommendation for you for the movie: Star Trek is 3.0
+	18
+	The Thief
+5
+Yes
+5
+Yes
+Yes
+	Our recommendation for you for the movie: The Thief is 5.0
