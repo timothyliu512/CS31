@@ -1,0 +1,493 @@
+﻿There were 30 test cases.  Each case is worth 3 points for a total correctness score of 90.  The remaining ten points were awarded by your TA relating to your reporting document and code comments.  Each test case is represented by an assertion that must be true for you to pass that test.
+To run the test cases:
+1. Remove the main routine from your main.cpp file.
+2. Append the following text to the end of your main.cpp file, and build the resulting program.
+3. For any test case you wish to try, run the program, providing as input the test number.
+
+
+
+
+#include "Enums.h"
+#include "MealPlan.h"
+#include "BruinCard.h"
+#include <iostream>
+#include <string>
+#include <cassert>
+using namespace std;
+
+
+void testone(int n)
+{
+    MealPlan m;
+    BruinCard c;
+
+
+    switch (n)
+    {
+        case  1:
+                    m.pickPlan( REGULAR19 );
+                    assert( m.getPlan() == REGULAR19 );
+                    assert( m.mealsEachWeek() == 19 );
+                    assert( m.unusedMealsCarryOver() == false );
+                    assert( std::to_string( m.cost() ) == "5278.200000" );
+                    break;
+        case  2:
+                    m.pickPlan( PREMIER19 );
+                    assert( m.getPlan() == PREMIER19 );
+                    assert( m.mealsEachWeek() == 19 );
+                    assert( m.unusedMealsCarryOver() == true );
+                    assert( std::to_string( m.cost() ) == "5898.200000" );
+                    break;
+        case  3:
+                    m.pickPlan( REGULAR14 );
+                    assert( m.getPlan() == REGULAR14 );
+                    assert( m.mealsEachWeek() == 14 );
+                    assert( m.unusedMealsCarryOver() == false );
+                    assert( std::to_string( m.cost() ) == "5107.200000" );
+                    break;
+        case  4:
+                    m.pickPlan( PREMIER14 );
+                    assert( m.getPlan() == PREMIER14 );
+                    assert( m.mealsEachWeek() == 14 );
+                    assert( m.unusedMealsCarryOver() == true );
+                    assert( std::to_string( m.cost() ) == "5570.040000" );
+                    break;
+        case  5:
+                    m.pickPlan( REGULAR11 );
+                    assert( m.getPlan() == REGULAR11 );
+                    assert( m.mealsEachWeek() == 11 );
+                    assert( m.unusedMealsCarryOver() == false );
+                    assert( std::to_string( m.cost() ) == "4646.640000" );
+                    break;
+        case  6:
+                    m.pickPlan( PREMIER11 );
+                    assert( m.getPlan() == PREMIER11 );
+                    assert( m.mealsEachWeek() == 11 );
+                    assert( m.unusedMealsCarryOver() == true );
+                    assert( std::to_string( m.cost() ) == "5018.280000" );
+                    break;
+        case  7:
+                    assert( c.hasPurchasedMealPlan() == false );
+                    assert( c.mealsLeftThisWeek() == 0 );
+                    break;
+        case 8:
+                    assert( c.hasPurchasedMealPlan() == false );
+                    m.pickPlan( REGULAR19 );
+                    c.purchaseMealPlan( m );
+                    assert( c.hasPurchasedMealPlan() == true );
+                    assert( c.getPlan() == REGULAR19 );
+                    assert( std::to_string( m.cost() ) == "5278.200000" );
+                    break;        
+        case 9:
+                    assert( c.hasPurchasedMealPlan() == false );
+                    m.pickPlan( PREMIER19 );
+                    c.purchaseMealPlan( m );
+                    assert( c.hasPurchasedMealPlan() == true );
+                    assert( c.getPlan() == PREMIER19 );
+                    assert( std::to_string( m.cost() ) == "5898.200000" );
+                    break;         
+        case 10:
+                    assert( c.hasPurchasedMealPlan() == false );
+                    m.pickPlan( REGULAR14 );
+                    c.purchaseMealPlan( m );
+                    assert( c.hasPurchasedMealPlan() == true );
+                    assert( c.getPlan() == REGULAR14 );
+                    assert( std::to_string( m.cost() ) == "5107.200000" );
+                    break;
+        case 11:
+                    assert( c.hasPurchasedMealPlan() == false );
+                    m.pickPlan( PREMIER14 );
+                    c.purchaseMealPlan( m );
+                    assert( c.hasPurchasedMealPlan() == true );
+                    assert( c.getPlan() == PREMIER14 );
+                    assert( std::to_string( m.cost() ) == "5570.040000" );
+                    break;    
+        case 12:
+                    assert( c.hasPurchasedMealPlan() == false );
+                    m.pickPlan( REGULAR11 );
+                    c.purchaseMealPlan( m );
+                    assert( c.hasPurchasedMealPlan() == true );
+                    assert( c.getPlan() == REGULAR11 );
+                    assert( std::to_string( m.cost() ) == "4646.640000" );
+                    break;     
+        case 13:
+                    assert( c.hasPurchasedMealPlan() == false );
+                    m.pickPlan( PREMIER11 );
+                    c.purchaseMealPlan( m );
+                    assert( c.hasPurchasedMealPlan() == true );
+                    assert( c.getPlan() == PREMIER11 );
+                    assert( std::to_string( m.cost() ) == "5018.280000" );
+                    break;         
+        case 14:
+                    m.pickPlan( PREMIER11 );
+                    c.purchaseMealPlan( m );
+                    assert( c.hasPurchasedMealPlan() == true );
+                    assert( c.getPlan() == PREMIER11 );
+                    assert( std::to_string( m.cost() ) == "5018.280000" );
+                    break;        
+        case 15:
+                    m.pickPlan( PREMIER11 );
+                    c.purchaseMealPlan( m );
+                    c.startQuarter();
+                    c.newWeek();
+                    c.newDay();
+                    assert( c.mealsLeftThisWeek() == 11*11 );
+                    c.newDay();
+                    assert( c.mealsLeftThisWeek() == 11*11 );
+                    c.newWeek();
+                    c.newDay();               
+                    assert( c.mealsLeftThisWeek() == 11*11 );
+                    break;        
+        case 16:
+                    m.pickPlan( PREMIER14 );
+                    c.purchaseMealPlan( m );
+                    c.startQuarter();
+                    c.newWeek();
+                    c.newDay();
+                    assert( c.mealsLeftThisWeek() == 11*14 );
+                    c.newDay();
+                    assert( c.mealsLeftThisWeek() == 11*14 );
+                    c.newWeek();
+                    c.newDay();
+                    assert( c.mealsLeftThisWeek() == 11*14 );
+                    break;        
+        case 17:
+                    m.pickPlan( PREMIER19 );
+                    c.purchaseMealPlan( m );
+                    c.startQuarter();
+                    c.newWeek();
+                    c.newDay();
+                    assert( c.mealsLeftThisWeek() == 11*19 );
+                    c.newDay();
+                    assert( c.mealsLeftThisWeek() == 11*19 );
+                    c.newWeek();
+                    c.newDay();
+                    assert( c.mealsLeftThisWeek() == 11*19 );
+                    break;         
+        case 18:
+                    m.pickPlan( REGULAR11 );
+                    c.purchaseMealPlan( m );
+                    c.startQuarter();
+                    c.newWeek();
+                    c.newDay();
+                    assert( c.mealsLeftThisWeek() == 11 );
+                    c.newDay();
+                    assert( c.mealsLeftThisWeek() == 11 );
+                    c.newWeek();
+                    c.newDay();
+                    assert( c.mealsLeftThisWeek() == 11 );
+                    break;        
+        case 19:
+                    m.pickPlan( REGULAR14 );
+                    c.purchaseMealPlan( m );
+                    c.startQuarter();
+                    c.newWeek();
+                    c.newDay();
+                    assert( c.mealsLeftThisWeek() == 14 );
+                    c.newDay();
+                    assert( c.mealsLeftThisWeek() == 14 );
+                    c.newWeek();
+                    c.newDay();
+                    assert( c.mealsLeftThisWeek() == 14 );
+                    break;         
+        case 20:
+                    m.pickPlan( REGULAR19 );
+                    c.purchaseMealPlan( m );
+                    c.startQuarter();
+                    c.newWeek();
+                    c.newDay();
+                    assert( c.mealsLeftThisWeek() == 19 );
+                    c.newDay();
+                    assert( c.mealsLeftThisWeek() == 19 );
+                    c.newWeek();
+                    c.newDay();
+                    assert( c.mealsLeftThisWeek() == 19 );
+                    break;
+        case 21:               
+                    assert( c.eat( BREAKFAST ) == false );
+                    assert( c.eat( LUNCH ) == false );
+                    assert( c.eat( DINNER ) == false );                    
+                    assert( c.mealsLeftThisWeek() == 0 ); 
+                    break;         
+        case 22:
+                    m.pickPlan( PREMIER11 );
+                    c.purchaseMealPlan( m );
+                    c.startQuarter();
+                    c.newWeek();
+                    c.newDay();
+
+
+                    assert( c.eat( BREAKFAST ) );
+                    assert( c.eat( BREAKFAST ) );
+                
+                    assert( c.mealsLeftThisWeek() == 11*11 - 2 );
+                    c.newDay();
+                    assert( c.mealsLeftThisWeek() == 11*11 - 2 );
+                    c.newWeek();
+                    assert( c.mealsLeftThisWeek() == 11*11 - 2 );
+                    assert( std::to_string( m.cost() ) == "5018.280000" );
+                    break;        
+        case 23:
+                    m.pickPlan( PREMIER14 );
+                    c.purchaseMealPlan( m );
+                    c.startQuarter();
+                    c.newWeek();
+                    c.newDay();
+
+
+                    assert( c.eat( LUNCH ) );
+                    assert( c.eat( LUNCH ) );
+                        
+                    assert( c.mealsLeftThisWeek() == 11*14 - 2 );
+                    c.newDay();
+                    assert( c.mealsLeftThisWeek() == 11*14 - 2 );
+                    c.newWeek();
+                    assert( c.mealsLeftThisWeek() == 11*14 - 2 );
+                    assert( std::to_string( m.cost() ) == "5570.040000" );
+                    break;         
+        case 24:
+                    m.pickPlan( PREMIER19 );
+                    c.purchaseMealPlan( m );
+                    c.startQuarter();
+                    c.newWeek();
+                    c.newDay();
+
+
+                    assert( c.eat( DINNER ) );
+                    assert( c.eat( DINNER ) );
+                        
+                    assert( c.mealsLeftThisWeek() == 11*19 - 2 );
+                    c.newDay();
+                    assert( c.mealsLeftThisWeek() == 11*19 - 2 );
+                    c.newWeek();
+                    assert( c.mealsLeftThisWeek() == 11*19 - 2 );
+                    assert( std::to_string( m.cost() ) == "5898.200000" );
+                    break;    
+        case 25:
+                    m.pickPlan( REGULAR11 );
+                    c.purchaseMealPlan( m );
+                    c.startQuarter();
+                    c.newWeek();
+                    c.newDay();
+                    assert( c.mealsLeftThisWeek() == 11 );
+                    assert( c.eat( LUNCH ) );
+                        
+                    assert( c.mealsLeftThisWeek() == 10 );
+                    assert( c.eat( LUNCH ) == false );
+                    assert( c.mealsLeftThisWeek() == 10 );
+
+
+                        
+                    c.newDay();
+                    assert( c.eat( LUNCH ) );
+                        
+                    assert( c.mealsLeftThisWeek() == 9 );
+                    assert( c.eat( LUNCH ) == false );
+                    assert( c.mealsLeftThisWeek() == 9 );
+                        
+                    assert( std::to_string( m.cost() ) == "4646.640000" );
+                    break;         
+        case 26:
+                    m.pickPlan( REGULAR14 );
+                    c.purchaseMealPlan( m );
+                    c.startQuarter();
+                    c.newWeek();
+                    c.newDay();
+                    assert( c.mealsLeftThisWeek() == 14 );
+                    assert( c.eat( WEEKENDBRUNCH ) );
+                        
+                    assert( c.mealsLeftThisWeek() == 13 );
+                    assert( c.eat( WEEKENDBRUNCH ) == false );
+                    assert( c.mealsLeftThisWeek() == 13 );
+
+
+                        
+                    c.newDay();
+                    assert( c.eat( WEEKENDBRUNCH ));
+                        
+                    assert( c.mealsLeftThisWeek() == 12 );
+                    assert( c.eat( WEEKENDBRUNCH ) == false  );
+                    assert( c.mealsLeftThisWeek() == 12 );
+                        
+                    assert( std::to_string( m.cost() ) == "5107.200000" );
+                    break;
+        case 27:
+                    m.pickPlan( REGULAR19 );
+                    c.purchaseMealPlan( m );
+                    c.startQuarter();
+                    c.newWeek();
+                    c.newDay();
+                    assert( c.mealsLeftThisWeek() == 19 );
+                    assert( c.eat( WEEKENDBRUNCH ) );
+                       
+                    assert( c.mealsLeftThisWeek() == 18 );
+                    assert( c.eat( WEEKENDBRUNCH ) == false );
+                    assert( c.mealsLeftThisWeek() == 18 );
+         
+                    c.newDay();
+                    assert( c.eat( WEEKENDBRUNCH ) );
+                        
+                    assert( c.mealsLeftThisWeek() == 17 );
+                    assert( c.eat( WEEKENDBRUNCH ) == false );
+                    assert( c.mealsLeftThisWeek() == 17 );
+                        
+                    assert( std::to_string( m.cost() ) == "5278.200000" );
+                    break;    
+        case 28:
+                    m.pickPlan( REGULAR11 );
+                    c.purchaseMealPlan( m );
+                    c.startQuarter();
+                    c.newWeek();
+                    c.newDay();
+                    assert( c.mealsLeftThisWeek() == 11 );
+                    assert( c.eat( LUNCH ) );
+                    assert( c.eat( BREAKFAST ) );
+                    assert( c.eat( DINNER ) );
+                    assert( c.mealsLeftThisWeek() == 8 );
+                        
+                    c.newDay();
+                    assert( c.eat( LUNCH ) );
+                    assert( c.eat( BREAKFAST ) );
+                    assert( c.eat( DINNER ) );
+                    assert( c.mealsLeftThisWeek() == 5 );
+                        
+                    c.newDay();
+                    assert( c.eat( LUNCH ) );
+                    assert( c.eat( BREAKFAST ) );
+                    assert( c.eat( DINNER ) );
+                    assert( c.mealsLeftThisWeek() == 2 );
+                        
+                    c.newDay();
+                    assert( c.eat( LUNCH ) );
+                    assert( c.eat( BREAKFAST ) );
+                    assert( c.mealsLeftThisWeek() == 0 );
+                    assert( c.eat( DINNER ) == false );
+                    assert( c.mealsLeftThisWeek() == 0 );
+                        
+                    c.newWeek();
+                    c.newDay();
+                    assert( c.mealsLeftThisWeek() == 11 );
+                    assert( std::to_string( m.cost() ) == "4646.640000" );
+
+
+                    break;     
+        case 29:
+                    m.pickPlan( REGULAR14 );
+                    c.purchaseMealPlan( m );
+                    c.startQuarter();
+                    c.newWeek();
+                    c.newDay();
+                    assert( c.mealsLeftThisWeek() == 14 );
+                    assert( c.eat( LUNCH ) );
+                    assert( c.eat( BREAKFAST ) );
+                    assert( c.eat( DINNER ) );
+                    assert( c.mealsLeftThisWeek() == 11 );
+                        
+                    c.newDay();
+                    assert( c.eat( LUNCH ) );
+                    assert( c.eat( BREAKFAST ) );
+                    assert( c.eat( DINNER ) );
+                    assert( c.mealsLeftThisWeek() == 8 );
+                        
+                    c.newDay();
+                    assert( c.eat( LUNCH ) );
+                    assert( c.eat( BREAKFAST ) );
+                    assert( c.eat( DINNER ) );
+                    assert( c.mealsLeftThisWeek() == 5 );
+                        
+                    c.newDay();
+                    assert( c.eat( LUNCH ) );
+                    assert( c.eat( BREAKFAST ) );
+                    assert( c.eat( DINNER ) );
+                    assert( c.mealsLeftThisWeek() == 2 );
+                        
+                    c.newDay();
+                    assert( c.eat( LUNCH ) );
+                    assert( c.eat( BREAKFAST ) );
+                    assert( c.mealsLeftThisWeek() == 0 );
+                    assert( c.eat( DINNER ) == false );
+                        
+                    c.newWeek();
+                    c.newDay();
+                    assert( c.mealsLeftThisWeek() == 14 );
+
+
+                    assert( std::to_string( m.cost() ) == "5107.200000" );
+
+
+                    break;         
+        case 30:
+                    m.pickPlan( REGULAR19 );
+                    c.purchaseMealPlan( m );
+                    c.startQuarter();
+                    c.newWeek();
+                    c.newDay();
+                    assert( c.mealsLeftThisWeek() == 19 );
+                    assert( c.eat( LUNCH ) );
+                    assert( c.eat( BREAKFAST ) );
+                    assert( c.eat( DINNER ) );
+                    assert( c.mealsLeftThisWeek() == 16 );
+                        
+                    c.newDay();
+                    assert( c.eat( LUNCH ) );
+                    assert( c.eat( BREAKFAST ) );
+                    assert( c.eat( DINNER ) );
+                    assert( c.mealsLeftThisWeek() == 13 );
+                        
+                    c.newDay();
+                    assert( c.eat( LUNCH ) );
+                    assert( c.eat( BREAKFAST ) );
+                    assert( c.eat( DINNER ) );
+                    assert( c.mealsLeftThisWeek() == 10 );
+                        
+                    c.newDay();
+                    assert( c.eat( LUNCH ) );
+                    assert( c.eat( BREAKFAST ) );
+                    assert( c.eat( DINNER ) );
+                    assert( c.mealsLeftThisWeek() == 7 );
+                        
+                    c.newDay();
+                    assert( c.eat( LUNCH ) );
+                    assert( c.eat( BREAKFAST ) );
+                    assert( c.eat( DINNER ) );
+                    assert( c.mealsLeftThisWeek() == 4 );
+                       
+                    c.newDay();
+                    assert( c.eat( LUNCH ) );
+                    assert( c.eat( BREAKFAST ) );
+                    assert( c.eat( DINNER ) );
+                    assert( c.mealsLeftThisWeek() == 1 );
+                        
+                    c.newDay();
+                    assert( c.eat( LUNCH ) );
+                    assert( c.eat( BREAKFAST )  == false );
+                    assert( c.eat( DINNER )  == false );
+                    assert( c.mealsLeftThisWeek() == 0 );
+                        
+                    c.newWeek();
+                    c.newDay();
+                    assert( c.mealsLeftThisWeek() == 19 );
+
+
+                    assert( std::to_string( m.cost() ) == "5278.200000" );
+                    break;        
+
+
+
+
+         default:
+                cout << "Bad argument" ;
+                break;
+    } 
+} 
+
+
+int main() 
+{
+    cout << "Enter test number: ";
+    int n;
+    cin >> n;
+    testone(n);
+    cout << "Passed!" << endl; 
+    return( 0 ); 
+}
