@@ -1,0 +1,280 @@
+﻿There were 57 test cases.  Each of the cases were worth 1.65 points, for a correctness total score of 94 points.  TAs awarded the remaining 6 points for documentation and the reporting document. Each test case is represented by an assertion that must be true for you to pass that test. 
+
+
+To run the test cases:
+1. Remove the main routine from your array.cpp file.
+2. Append the following text to the end of your array.cpp file, and build the resulting program.
+3. For any test case you wish to try, run the program, providing as input the test number.
+
+
+
+
+#include <iostream>
+#include <string>
+#include <cassert>
+using namespace std;
+
+
+
+
+void testone(int n)
+{
+    const int N = 6;
+    
+    // Act as if  a  were declared:
+    //   string a[6] = {
+    //       "alpha", "beta", "gamma", "tau", "beta", "epsilon"
+    //   };
+    // This is done in a way that will cause a crash if
+    // a[-1] or a[6] is accessed:  We place garbage in those positions.
+    string aa[1+N+1] = {
+        "", "alpha", "beta", "gamma", "tau", "beta", "epsilon", ""
+    };
+    string* a = &aa[1];
+    string* z = aa;
+    a[-1].string::~basic_string();
+    a[N].string::~basic_string();
+    fill_n(reinterpret_cast<char*>(&a[-1]), sizeof(a[-1]), 0xEF);
+    fill_n(reinterpret_cast<char*>(&a[N]), sizeof(a[N]), 0xEF);
+    
+    string data1[ N ] = { "abcdef", "ABCDEF", "123", "aaaaa", "zzzzz", "0123" };
+    string data2[ N ] = { "1", "4", "6", "1", "5", "0" };
+    string data3[ N ] = { "0123", "zzzzz", "0123", "zzzzz", "zzzzz", "zzzzz" };
+    string b[ N ] = { "delta", "gamma", "beta", "alpha", "beta", "alpha" };
+    string c[ N ] = { "one:", "two/", "three'", "alpha.", "beta", "alpha." };
+    string d[ N ] = { "one-", "23/", "four:", "56.", "seven,", "89'" };
+
+
+    switch (n)
+    {
+        case 1:
+            assert(locateMaximum(z, -1) == -1);
+            break;
+        case 2:
+            assert(locateMaximum(z, 0 ) == -1);
+            break;
+        case 3:
+            assert(locateMaximum(data1, N ) == 4 );
+            break;
+        case 4:
+            assert(locateMaximum(data1, 5 ) == 4);
+            break;
+        case 5:
+            assert(locateMaximum(data1, 4 ) == 0);
+            break;
+        case 6:
+            assert(locateMaximum(data1, 3 ) == 0);
+            break;
+        case 7:
+            assert(locateMaximum(data1, 2 ) == 0);
+            break;                       
+        case 8:
+            assert(findSecondToLastOccurrence(z, -1, "foobar") == -1);
+            break;
+        case 9:
+            assert(findSecondToLastOccurrence(z, 0, "foobar") == -1);
+            break;
+        case 10:
+            assert(findSecondToLastOccurrence(a, 6, "foobar") == -1);
+            break;
+        case 11:
+            assert(findSecondToLastOccurrence(data3, 6, "zzzzz") == 4);
+            break;
+        case 12:
+            assert(findSecondToLastOccurrence(data3, 5, "alpha") == -1);
+            break;
+        case 13:
+            assert(findSecondToLastOccurrence(data3, 5, "zzzzz") == 3);
+            break;
+        case 14:
+            assert(findSecondToLastOccurrence(data3, 4, "zzzzz") == 1);
+            break;
+        case 15:
+            assert(findSecondToLastOccurrence(data3, 4, "beta" ) == -1);
+            break;            
+        case 16:
+            assert(moveToEnd(z, -1, 1) == -1);
+            break;
+        case 17:
+            assert(moveToEnd(z, 0, 1) == -1);
+            break;
+        case 18:
+            assert(moveToEnd(z, 12, -1) == -1);
+            break;
+        case 19:
+            assert(moveToEnd(z, -1, -1) == -1);
+            break;
+        case 20:
+            assert(moveToEnd(a, 6, 3) == 3);
+            assert( a[0] == "alpha" );
+            assert( a[1] == "beta" );
+            assert( a[2] == "gamma" );
+            assert( a[3] == "beta" );
+            assert( a[4] == "epsilon" );
+            assert( a[5] == "tau" );
+            break;
+        case 21:
+            assert(moveToEnd(a, 6, 7) == -1);
+            break;
+        case 22:
+            assert(moveToEnd(a, 3, 0) == 0);
+            assert( a[0] == "beta" );
+            assert( a[1] == "gamma" );
+            assert( a[2] == "alpha" );
+            break;                        
+        case 23:
+            assert(moveToEnd(a, 4, 1) == 1);
+            assert( a[0] == "alpha" );
+            assert( a[1] == "gamma" );
+            assert( a[2] == "tau" );
+            assert( a[3] == "beta" );
+            break;
+        case 24:
+            assert(hasNoDuplicates(z, -1) == false);
+            break;
+        case 25:
+            assert(hasNoDuplicates(z, 0) == true);
+            break;
+        case 26:
+            assert(hasNoDuplicates(a, 6) == false);
+            break;            
+        case 27:
+            assert(hasNoDuplicates(b, 6) == false);
+            break;            
+        case 28:
+            assert(hasNoDuplicates(a, 3) == true);
+            break;            
+        case 29:
+            assert(hasNoDuplicates(a, 4) == true);
+            break;            
+        case 30:
+            assert(hasNoDuplicates(a, 5) == false);
+            break; 
+        case 31:
+            assert(hasNoDuplicates(b, 3) == true);
+            break;
+        case 32:
+            assert(hasNoDuplicates(b, 4) == true);
+            break;
+        case 33:
+            assert(hasNoDuplicates(b, 5) == false);
+            break;
+        case 34:
+            assert(flipAround(z, -1) == 0 || flipAround(z, -1) == 1);
+            break;
+        case 35:  
+            assert(flipAround(z, 0) == 0);;
+            break;
+        case 36:
+            assert(flipAround(a, 6) == 3);
+            assert( a[0] == "epsilon" );
+            assert( a[1] == "beta" );
+            assert( a[2] == "tau" );
+            assert( a[3] == "gamma" );
+            assert( a[4] == "beta" );
+            assert( a[5] == "alpha" ); 
+            break;
+        case 37:
+            assert(flipAround(b, 6) == 3); 
+            assert( b[0] == "alpha" );
+            assert( b[1] == "beta" );
+            assert( b[2] == "alpha" );
+            assert( b[3] == "beta" );
+            assert( b[4] == "gamma" );
+            assert( b[5] == "delta" ); 
+            break;                        
+        case 38:
+            assert(flipAround(a, 3) == 1);
+            assert( a[0] == "gamma" );
+            assert( a[1] == "beta" );
+            assert( a[2] == "alpha" );
+            break;
+        case 39:
+            assert(flipAround(b, 3) == 1);
+            assert( b[0] == "beta" );
+            assert( b[1] == "gamma" );
+            assert( b[2] == "delta" ); 
+            break;
+        case 40:
+            assert(flipAround(b, 4) == 2);
+            assert( b[0] == "alpha" );
+            assert( b[1] == "beta" );
+            assert( b[2] == "gamma" );
+            assert( b[3] == "delta" );
+            break;
+        case 41:
+            assert(countPunctuation(z, -1) == -1 );
+            break;
+        case 42:
+            assert(countPunctuation(z, 0) == -1 );
+            break;
+        case 43:
+            assert(countPunctuation(a, 6) == 0 );
+            break;
+        case 44:
+            assert(countPunctuation(b, 6) == 0 );
+            break;
+        case 45:
+            assert(countPunctuation(a, 3) == 0 );
+            break;       
+        case 46:
+            assert(countPunctuation(c, 6) == 5);
+            break;
+        case 47:
+            assert(countPunctuation(c, 5) == 4);
+            break;
+        case 48:
+            assert(countPunctuation(d, 5) == 5);
+            break;
+        case 49:
+            assert(countPunctuation(d, 4) == 4);
+            break;
+        case 50:
+            assert(countXPairs(z, -1, 0) == -1);
+            break;
+        case 51:
+            assert(countXPairs(z, 0, 0) == -1);
+            break;
+        case 52:
+            assert(countXPairs(a, -10, 0) == -1);
+            break;
+        case 53:
+            assert(countXPairs(a, 0, 0) == -1);
+            break;
+        case 54:
+            assert(countXPairs(data2, 6, 100) == 0);
+            break;
+        case 55: 
+            assert(countXPairs(data2, 6, 9) == 1);
+            break;
+        case 56:
+            assert(countXPairs(data2, 6, 7) == 2);
+            break;
+        case 57: 
+            assert(countXPairs(data2, 6, 6) == 3);
+            break;
+            
+        default:
+            cout << "Bad argument" ;
+            break;            
+            
+    }
+    
+    new (&a[-1]) string;
+    new (&a[N]) string;
+}
+
+
+
+
+
+
+int main(  )
+{
+    int number = 0;
+    cout << "Provide a test number: ";
+    cin  >> number;
+    testone( number );
+    cout << "Test passed!" << endl;
+    return( 0 );
+}
