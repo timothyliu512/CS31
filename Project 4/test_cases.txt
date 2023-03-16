@@ -1,4 +1,4 @@
-﻿There were 57 test cases. Each of the cases were worth 1.65 points, for a correctness total score of 94 points.  TAs awarded the remaining 6 points for documentation and the reporting document. Each test case is represented by an assertion that must be true for you to pass that test. 
+﻿There were 57 test cases. Each of the cases were worth 1.65 points, for a correctness total score of 94 points. TAs awarded the remaining 6 points for documentation and the reporting document. Each test case is represented by an assertion that must be true for you to pass that test. 
 
 
 To run the test cases:
